@@ -1,6 +1,6 @@
 import Image from "next/image";
-import styles from '@/styles/Home.module.css'
-import {useEffect, useState} from "react";
+import styles from '../styles/Home.module.css'
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 
 const gms_ver = 238;
@@ -181,9 +181,9 @@ function editSymbols(name) {
             areas.map((a) => {
                 if (item.getAttribute("name") === a.area) {
                     if (item.getAttribute("id").includes("level")) {
-                        a.level = item.value === "" ? 0 : item.value;
+                        a.level = item.value === "" ? 0 : item.value as number;
                     } else if (item.getAttribute("id").includes("exp")) {
-                        a.exp = item.value === "" ? 0 : item.value;
+                        a.exp = item.value === "" ? 0 : item.value as number;
                     }
                 }
             })
@@ -313,7 +313,10 @@ export function CharacterEquips({equips, name}) {
                         <div id={e.slot + "_div"}>
                         </div>
                         <br/>
-                        <select id={e.slot} onChange={(event) => updateEquipImage(event.nativeEvent.target.selectedIndex - 1, e)}>
+                        <select id={e.slot} onChange={(event: React.ChangeEvent<HTMLSelectElement>): void => {
+                            let index = event.nativeEvent.target as HTMLSelectElement;
+                            updateEquipImage(index, e);
+                        }}>
                             <option value="" selected disabled hidden>Select</option>
                             {equipment[e.type].map((eqp) => (
                                 <option value={eqp.split(":")[0]}>
@@ -334,8 +337,8 @@ const updateBossStorage = (checked, name, b, data, index) => {
     const totalMeso = document.getElementById("mesoValue");
     const mesoConvert = totalMeso.innerHTML.replace(/\,/g,'');
 
-    const bossCheckBox = document.getElementById(b.boss + "_box");
-    const selectedOption = document.getElementById(b.boss + "_options");
+    const bossCheckBox = document.getElementById(b.boss + "_box") as HTMLInputElement;
+    const selectedOption = document.getElementById(b.boss + "_options") as HTMLSelectElement;
 
     if (bossCheckBox.checked) {
 
@@ -369,7 +372,7 @@ const updateBossValue = (event, name, b, data, index) => {
     const bossValue = document.getElementById(b.boss + "_value");
     bossValue.innerHTML = b.values[event.nativeEvent.target.selectedIndex].toLocaleString("en") + " meso";
 
-    const bossCheckBox = document.getElementById(b.boss + "_box");
+    const bossCheckBox = document.getElementById(b.boss + "_box") as HTMLInputElement;
     if (bossCheckBox.checked) {
         updateBossStorage(true, name, b, data, index);
     }

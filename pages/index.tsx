@@ -1,12 +1,8 @@
-import styles from '@/styles/Home.module.css'
-import Image from "next/image";
+import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import {useEffect, useState} from "react";
-import {CharacterShowcase} from "@/components/character_info";
+import {CharacterShowcase} from "../components/character_info";
 
 export default function Home() {
-
-
     return (
         <>
             <div className={styles.character_showcase}>

@@ -1,15 +1,22 @@
 import Image from "next/image";
 import React, { useState } from 'react';
 import Link from "next/link";
-import styles from '@/styles/Home.module.css'
-import {areas, bosses, equips, jobs} from "@/components/character_info";
+import styles from '../styles/Home.module.css'
+import {areas, bosses, equips, jobs} from "../components/character_info";
 
 const addCharacter = () => {
 
-    const name = document.getElementById("cname").value;
-    const preview = document.getElementById("cpreview").value;
-    const level = document.getElementById("clevel").value;
-    const job = document.getElementById("cjobs").value;
+    const cname = document.getElementById("cname") as HTMLInputElement;
+    const name = cname.value;
+
+    const cpreview = document.getElementById("cpreview") as HTMLDataElement;
+    const preview = cpreview.value;
+
+    const clevel = document.getElementById("clevel") as HTMLInputElement;
+    const level = clevel.value;
+
+    const cjob = document.getElementById("cjobs") as HTMLInputElement;
+    const job = cjob.value;
 
     if (name.length === 0 || level.length === 0) {
         const error = document.getElementById("addError");
@@ -39,7 +46,8 @@ export default function AddCharacter() {
     const [height, setHeight] = useState(68);
 
     const updateCharacterPreview = () => {
-        const linkValue = document.getElementById("cpreview").value;
+        const cpreview = document.getElementById("cpreview") as HTMLDataElement;
+        const linkValue = cpreview.value;
         if (linkValue.length > 0) {
             setPreview(linkValue);
             setWidth(96);

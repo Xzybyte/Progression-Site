@@ -1,13 +1,21 @@
 import { useRouter } from 'next/router'
 import {useEffect, useState} from "react";
 import Link from "next/link";
-import {CharacterBosses, CharacterEquips, CharacterImage, CharacterSymbols} from "@/components/character_info";
-import styles from '@/styles/Home.module.css'
+import {CharacterBosses, CharacterEquips, CharacterImage, CharacterSymbols} from "../components/character_info";
+import styles from '../styles/Home.module.css'
 
 
 export default function ViewCharacter() {
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({
+        bosses: [],
+        equips: [],
+        job: "",
+        level: "",
+        name: "",
+        preview: "",
+        symbols: []
+    });
     const router = useRouter();
     const {character} = router.query;
 
